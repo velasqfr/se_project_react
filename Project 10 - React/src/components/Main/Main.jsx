@@ -3,7 +3,7 @@ import WeatherCard from "../WeatherCard/WeatherCard";
 import ItemCard from "../ItemCard/ItemCard";
 import { defaultClothingItems } from "../../utils/constants.js";
 
-function Main({ weatherData }) {
+function Main({ weatherData, handleCardClick }) {
   return (
     <main>
       <WeatherCard />
@@ -17,7 +17,13 @@ function Main({ weatherData }) {
             //     return item.weather === weatherData.type;
             //  })
             .map((item) => {
-              return <ItemCard key={item._id} item={item} />;
+              return (
+                <ItemCard
+                  key={item._id}
+                  item={item}
+                  onCardClick={handleCardClick}
+                />
+              );
             })}
         </ul>
       </section>
@@ -29,3 +35,6 @@ export default Main;
 /* wraping items in curly braces allows you to escape back to JS*/
 /*the key always needs to go on the outermost piece of the markup you are renduring 
 (if it is a component, it goes in the component) */
+
+/*We are passing 'handleCardClick' from the <main /> component in App.jsx and then we specify the prop in Main.jsx
+/*We then need to pas it through the componentwe want it to get to and call it onCardClick (DIFF from onClick) */

@@ -5,17 +5,42 @@ import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Footer from "../footer/footer";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import ItemModal from "../ItemModal/ItemModal";
 
 function App() {
   const [weatherData, setWeatherData] = useState({ type: "cold" });
+  const [activeModal, setActiveModal] = useState(""); //an empy string means no modal is active
+  const [selectedCard, setSelectedCard] = useState({});
+
+  ///////////// -- Opening & closing the Modal -- //////////////
+  const handleAddClick = () => {
+    setActiveModal("add-garment");
+  };
+
+  const closeActiveModal = () => {
+    setActiveModal("");
+  };
+  ///////////// -- Opening & closing the Modal -- //////////////
+
+  ///////////// -- Clicking the Card to open the Modal -- //////////////
+  const handleCardClick = (card) => {
+    setActiveModal("preview");
+    setSelectedCard(card);
+  };
+  ///////////// -- Clicking the Card to open the Modal -- //////////////
 
   return (
     <div className="page">
       <div className="page__content">
-        <Header />
-        <Main weatherData={weatherData} />
+        <Header handleAddClick={handleAddClick} />
+        <Main weatherData={weatherData} handleCardClick={handleCardClick} />
       </div>
-      <ModalWithForm title="New garment" buttonText="Add garment">
+      <ModalWithForm
+        title="New garment"
+        buttonText="Add garment"
+        activeModal={activeModal}
+        onClose={closeActiveModal}
+      >
         <label htmlFor="name" className="modal__label">
           Name{" "}
           <input
@@ -58,6 +83,11 @@ function App() {
           </label>
         </fieldset>
       </ModalWithForm>
+      <ItemModal
+        activeModal={activeModal}
+        card={selectedCard}
+        onClose={closeActiveModal}
+      />
       <Footer />
     </div>
   );

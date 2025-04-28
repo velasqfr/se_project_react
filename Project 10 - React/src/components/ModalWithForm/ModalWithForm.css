@@ -8,8 +8,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  /*visibility: hidden;*/
+  visibility: hidden;
   border: 1px solid;
+}
+
+.modal__opened {
+  visibility: visible;
 }
 
 .modal__title {

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import "./App.css";
 import Header from "../Header/Header";
@@ -6,9 +6,15 @@ import Main from "../Main/Main";
 import Footer from "../footer/footer";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import ItemModal from "../ItemModal/ItemModal";
+import { getWeather, filterWeatherData } from "../../utils/weatherAPI";
+import { coordinates, APIkey } from "../../utils/constants";
 
 function App() {
-  const [weatherData, setWeatherData] = useState({ type: "cold" });
+  const [weatherData, setWeatherData] = useState({
+    type: "",
+    temp: { F: 999 },
+    city: "",
+  });
   const [activeModal, setActiveModal] = useState(""); //an empy string means no modal is active
   const [selectedCard, setSelectedCard] = useState({});
 
@@ -29,10 +35,23 @@ function App() {
   };
   ///////////// -- Clicking the Card to open the Modal -- //////////////
 
+  ///////////////API Weather - when the page loads/////////////////////////
+  //the way a useEffect works, if you pass a second arguement that is an empty array, it will get run (&one time only) when the component first loads
+
+  useEffect(() => {
+    //We are passing the object 'coordinates' as the first firs property, and then structuring the property that is in the object
+    getWeather(coordinates, APIkey)
+      .then((data) => {
+        const filteredData = filterWeatherData(data);
+        setWeatherData(filteredData);
+      })
+      .catch(console.error);
+  }, []);
+
   return (
     <div className="page">
       <div className="page__content">
-        <Header handleAddClick={handleAddClick} />
+        <Header handleAddClick={handleAddClick} weatherData={weatherData} />
         <Main weatherData={weatherData} handleCardClick={handleCardClick} />
       </div>
       <ModalWithForm
@@ -63,7 +82,7 @@ function App() {
           <legend className="modal__legend">Select the weather type</legend>
           <label htmlFor="hot" className="modal__label modal__label_type_radio">
             <input id="cold" type="radio" className="modal__radio-input" />
-            Hot
+            <span>Hot</span>
           </label>
 
           <label
@@ -71,7 +90,7 @@ function App() {
             className="modal__label modal__label_type_radio"
           >
             <input id="cold" type="radio" className="modal__radio-input" />
-            Warm
+            <span>Warm</span>
           </label>
 
           <label
@@ -79,7 +98,7 @@ function App() {
             className="modal__label modal__label_type_radio"
           >
             <input id="cold" type="radio" className="modal__radio-input" />
-            Cold
+            <span>Cold</span>
           </label>
         </fieldset>
       </ModalWithForm>

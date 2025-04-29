@@ -23,6 +23,53 @@ export const weatherOptions = [
     condition: "cloudy",
     url: new URL("../assets/night/cloudy.png", import.meta.url).href,
   },
+
+  {
+    day: true,
+    condition: "fog",
+    url: new URL("../assets/day/fog.png", import.meta.url).href,
+  },
+
+  {
+    day: true,
+    condition: "rain",
+    url: new URL("../assets/day/rain.png", import.meta.url).href,
+  },
+
+  {
+    day: false,
+    condition: "fog",
+    url: new URL("../assets/night/fog.png", import.meta.url).href,
+  },
+
+  {
+    day: false,
+    condition: "rain",
+    url: new URL("../assets/night/rain.png", import.meta.url).href,
+  },
+  {
+    day: true,
+    condition: "snow",
+    url: new URL("../assets/day/snow.png", import.meta.url).href,
+  },
+
+  {
+    day: true,
+    condition: "storm",
+    url: new URL("../assets/day/storm.png", import.meta.url).href,
+  },
+
+  {
+    day: false,
+    condition: "snow",
+    url: new URL("../assets/night/snow.png", import.meta.url).href,
+  },
+
+  {
+    day: false,
+    condition: "storm",
+    url: new URL("../assets/night/storm.png", import.meta.url).href,
+  },
 ];
 
 export const defaultWeatherOptions = {
@@ -78,5 +125,9 @@ export const coordinates = {
   latitude: 40.76281,
   longitude: -73.993149,
 };
+
+//Chones, Ecuador Coordinates to test out different weather icon:
+//Latitude: -0.6833333,
+//longitude: -80.1
 
 export const APIkey = "60b7c0d868aadffe04cd99623c32ceae";

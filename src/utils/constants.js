@@ -122,8 +122,8 @@ export const defaultClothingItems = [
 ];
 
 export const coordinates = {
-  latitude: 40.76281,
-  longitude: -73.993149,
+  latitude: 40.783058,
+  longitude: -73.971252,
 };
 
 //Chones, Ecuador Coordinates to test out different weather icon:

@@ -10,10 +10,9 @@
   align-items: center;
   visibility: hidden;
   border: 1px solid;
-  visibility: hidden;
 }
 
-.modal__opened {
+.modal_opened {
   visibility: visible;
 }
 

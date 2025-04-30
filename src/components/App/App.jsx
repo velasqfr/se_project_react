@@ -57,7 +57,7 @@ function App() {
       <ModalWithForm
         title="New garment"
         buttonText="Add garment"
-        activeModal={activeModal}
+        isOpen={activeModal === "add-garment"}
         onClose={closeActiveModal}
       >
         <label htmlFor="name" className="modal__label">
@@ -81,7 +81,13 @@ function App() {
         <fieldset className="modal__radio-buttons">
           <legend className="modal__legend">Select the weather type</legend>
           <label htmlFor="hot" className="modal__label modal__label_type_radio">
-            <input id="cold" type="radio" className="modal__radio-input" />
+            <input
+              id="hot"
+              type="radio"
+              name="weather"
+              value="hot"
+              className="modal__radio-input"
+            />
             <span>Hot</span>
           </label>
 
@@ -89,7 +95,13 @@ function App() {
             htmlFor="warm"
             className="modal__label modal__label_type_radio"
           >
-            <input id="cold" type="radio" className="modal__radio-input" />
+            <input
+              id="warm"
+              type="radio"
+              name="weather"
+              value="warm"
+              className="modal__radio-input"
+            />
             <span>Warm</span>
           </label>
 
@@ -97,7 +109,13 @@ function App() {
             htmlFor="cold"
             className="modal__label modal__label_type_radio"
           >
-            <input id="cold" type="radio" className="modal__radio-input" />
+            <input
+              id="cold"
+              type="radio"
+              name="weather"
+              value="cold"
+              className="modal__radio-input"
+            />
             <span>Cold</span>
           </label>
         </fieldset>
@@ -113,3 +131,5 @@ function App() {
 }
 
 export default App;
+
+/*htmlFor: "" SHOULD MATCH THE ID: "" */

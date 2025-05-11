@@ -19,5 +19,5 @@ function ItemModal({ activeModal, onClose, card }) {
 }
 export default ItemModal;
 
-/*if activeModal equals "preview" then we'll apply the class "modal__opened" */
+/*if activeModal equals "preview" then we'll apply the class "modal_opened" */
 /* it is card.link because of what it is being called 'card' */

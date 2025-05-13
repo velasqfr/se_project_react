@@ -1,0 +1,8 @@
+.add__clothes-btn {
+  display: flex;
+  border: none;
+  color: #00000099;
+  opacity: 60%;
+  font-family: "Cabinet Grotesk", sans-serif;
+  font-weight: 700;
+}

@@ -88,6 +88,7 @@ export const defaultClothingItems = [
     name: "Cap",
     weather: "warm",
     link: "https://i.pinimg.com/564x/7c/97/8c/7c978cafd491f2ec3f559a68660ce9f6.jpg",
+    //https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Cap.png?etag=f3dad389b22909cafa73cff9f9a3d591
   },
   {
     _id: 1,
@@ -103,21 +104,25 @@ export const defaultClothingItems = [
   },
   {
     _id: 3,
-    name: "Sneakers",
+    name: "Boots",
     weather: "cold",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Sneakers.png?etag=3efeec41c1c78b8afe26859ca7fa7b6f",
+    link: "https://img.freepik.com/premium-vector/vector-cartoon-yellow-work-boots-illustration_1258045-3932.jpg",
+    //https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Sneakers.png?etag=3efeec41c1c78b8afe26859ca7fa7b6f
   },
+
   {
     _id: 4,
     name: "T-Shirt",
     weather: "warm",
     link: "https://newyorkornowhere.com/cdn/shop/files/NYON-New-York-Or-Nowhere-Women_s-Motto-Tee-Blue-Composite.png?v=1733331606&width=1600",
+    //https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/T-Shirt.png?etag=44ed1963c44ab19cd2f5011522c5fc09
   },
   {
     _id: 5,
     name: "Coat",
     weather: "cold",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Coat.png?etag=298717ed89d5e40b1954a1831ae0bdd4",
+    link: "https://www.supremecommunity.com/u/season/fall-winter2023/drop/supreme-r-the-north-face-r-suede-nuptse-jacket-black-0.jpg",
+    //https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Coat.png?etag=298717ed89d5e40b1954a1831ae0bdd4
   },
   {
     _id: 6,

@@ -135,3 +135,11 @@
   font: "Cabinet Grotesk" sans-serif;
   cursor: pointer;
 }
+
+.modal__submit:hover {
+  background-color: #00000099;
+}
+
+.modal__submit:active {
+  background-color: #000000;
+}

@@ -94,13 +94,15 @@ export const defaultClothingItems = [
     _id: 1,
     name: "Hoodie",
     weather: "cold",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Hoodie.png?etag=5f52451d0958ccb1016c78a45603a4e8",
+    link: "https://cdn.poizon.com/pro-img/cut-img/20250328/74468aaf5b574e22ae52e8a4f814e3b7.jpg?x-oss-process=image/format,webp/resize,w_750",
+    //https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Hoodie.png?etag=5f52451d0958ccb1016c78a45603a4e8
   },
   {
     _id: 2,
     name: "Jacket",
     weather: "cold",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Jacket.png?etag=f4bb188deaa25ac84ce2338be2d404ad",
+    link: "https://cdn-img.poizonapp.com/pro-img/cut-img/20250406/e32c905fbcb7417db721868ba306a988.jpg?x-oss-process=image/format,webp/resize,w_800,h_800",
+    //https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Jacket.png?etag=f4bb188deaa25ac84ce2338be2d404ad
   },
   {
     _id: 3,
@@ -150,7 +152,7 @@ export const defaultClothingItems = [
   },
   {
     _id: 10,
-    name: "Shoes",
+    name: "Sneakers",
     weather: "hot",
     link: "https://i.pinimg.com/736x/33/73/b3/3373b308935a205a905ced4d3d45bc73.jpg",
   },

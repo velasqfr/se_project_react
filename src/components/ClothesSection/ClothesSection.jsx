@@ -5,8 +5,8 @@ import ItemCard from "../ItemCard/ItemCard";
 function ClothesSection({ handleCardClick, handleAddClick }) {
   return (
     <div className="clothes-section">
-      <div>
-        <p>Your Items</p>
+      <div className="clothes-section__header">
+        <p className="clothes-section__text">Your Items</p>
         <button
           onClick={handleAddClick}
           className="add__clothes-btn"

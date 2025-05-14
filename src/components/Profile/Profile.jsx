@@ -2,7 +2,7 @@ import ClothesSection from "../ClothesSection/ClothesSection";
 import SideBar from "../SideBar/SideBar";
 import "./Profile.css";
 
-function Profile() {
+function Profile({ handleCardClick }) {
   return (
     <div className="profile">
       <section className="profile__sidebar">
@@ -10,7 +10,7 @@ function Profile() {
         <img src="" alt="" />
       </section>
       <section className="profile__clothing-items">
-        <ClothesSection />
+        <ClothesSection handleCardClick={handleCardClick} />
       </section>
     </div>
   );

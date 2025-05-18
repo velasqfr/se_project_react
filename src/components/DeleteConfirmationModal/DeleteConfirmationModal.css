@@ -1,9 +1,15 @@
-.modal__confirm-container {
+.modal__content_type_confirm {
   position: relative;
-  width: 670px;
+  min-width: 670px;
   height: 280px;
   background-color: white;
   border-radius: 20px;
+  padding: 24px 40px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .modal__content {
@@ -45,8 +51,10 @@
   width: 138px;
   height: 24px;
   position: relative;
-  margin-left: 170px;
+  left: 10px;
+  bottom: 20px;
   display: flex;
+  cursor: pointer;
 }
 
 .cancel__modal-btn {
@@ -61,6 +69,7 @@
   width: 61px;
   height: 24px;
   position: relative;
-  margin-left: 190px;
-  margin-top: 30px;
+  left: 30px;
+  top: 10px;
+  cursor: pointer;
 }

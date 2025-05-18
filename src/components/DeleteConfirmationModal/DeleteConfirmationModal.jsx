@@ -5,7 +5,7 @@ import close from "../../assets/close.png";
 function DeleteConfirmationModal({ isOpen, onClose, onConfirm }) {
   return (
     <div className={`modal ${isOpen ? " modal_opened" : ""}`}>
-      <div className="modal__content">
+      <div className="modal__content modal__content_type_confirm">
         <button type="button" className="modal__close" onClick={onClose}>
           <img src={close} alt="Close modal" className="close__modal-icon" />
         </button>

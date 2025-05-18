@@ -49,7 +49,7 @@ function App() {
 
   /////////////////// -- Adding Item to the Form Mode -- ///////////////////
   const handleAddItemModalSubmit = ({ name, imageUrl, weather }) => {
-    addItem({ name, link: imageUrl, weather })
+    addItem({ name, imageUrl, weather })
       .then((newItem) => {
         setClothingItems((prevItems) => [newItem, ...prevItems]);
         closeActiveModal();

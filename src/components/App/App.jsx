@@ -11,7 +11,9 @@ import { coordinates, APIkey } from "../../utils/constants";
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
 import Profile from "../Profile/Profile";
 import AddItemModal from "../AddItemModal/AddItemModal";
-import { defaultClothingItems } from "../../utils/constants";
+//import { defaultClothingItems } from "../../utils/constants";
+import { getItems, addItem, deleteItem } from "../../utils/api";
+import DeleteConfirmationModal from "../DeleteConfirmationModal/DeleteConfirmationModal";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -21,9 +23,9 @@ function App() {
   });
   //[State variable, setter function]
   //We ONLY ever call a setter function within the same component that it's state is defined in!
-  const [clothingItems, setClothingItems] = useState(defaultClothingItems);
+  const [clothingItems, setClothingItems] = useState([]);
   const [activeModal, setActiveModal] = useState(""); //an empty string means(Default) => no modal is active here
-  const [selectedCard, setSelectedCard] = useState({});
+  const [selectedCard, setSelectedCard] = useState(null);
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
 
   //If the current temperature is "F" switch it to "C", if it is "C" switch it to "F"
@@ -37,6 +39,7 @@ function App() {
 
   ///////////// -- Opening & closing the Modal -- //////////////
   const handleAddClick = () => {
+    console.log("Add button clicked");
     setActiveModal("add-garment");
   };
 
@@ -46,15 +49,12 @@ function App() {
 
   /////////////////// -- Adding Item to the Form Mode -- ///////////////////
   const handleAddItemModalSubmit = ({ name, imageUrl, weather }) => {
-    const newId = Math.max(...clothingItems.map((item) => item._id)) + 1; //this code is to give each newly added clothing item a unique Key id #
-    //Update clothingItems array
-    setClothingItems((prevItems) => [
-      //we are updating it to all the previous arrays of the clothingItems by using (...)
-      { name, link: imageUrl, weather, _id: newId },
-      ...prevItems,
-    ]);
-    //Close the modal
-    closeActiveModal();
+    addItem({ name, link: imageUrl, weather })
+      .then((newItem) => {
+        setClothingItems((prevItems) => [newItem, ...prevItems]);
+        closeActiveModal();
+      })
+      .catch(console.error);
   };
 
   ///////////// -- Opening & closing the Card-Modal -- //////////////
@@ -64,6 +64,27 @@ function App() {
     setActiveModal("preview");
     setSelectedCard(card);
   };
+
+  //////////////////--Delete Card item Handler --////////////////////
+  const handleDeleteCard = (cardToDelete) => {
+    deleteItem(cardToDelete._id)
+      .then(() => {
+        setClothingItems((prevItems) =>
+          prevItems.filter((item) => item._id !== cardToDelete._id)
+        );
+        //close all modals and reset selected card
+        setActiveModal("");
+        setSelectedCard(null);
+      })
+      .catch(console.error);
+  };
+
+  /////////////--New Handler for condimration deletion--/////////////
+  const openConfirmationModal = (card) => {
+    setSelectedCard(card);
+    setActiveModal("delete-confirm");
+  };
+
   ///////////// -- Clicking the Card to open the Modal -- //////////////
 
   ///////////////API Weather - when the page loads/////////////////////////
@@ -75,6 +96,18 @@ function App() {
       .then((data) => {
         const filteredData = filterWeatherData(data);
         setWeatherData(filteredData);
+      })
+      .catch(console.error);
+  }, []);
+
+  useEffect(() => {
+    getItems()
+      .then((data) => {
+        console.log(data);
+        //set the clothing items
+        if (Array.isArray(data)) {
+          setClothingItems(data);
+        }
       })
       .catch(console.error);
   }, []);
@@ -94,12 +127,19 @@ function App() {
                   weatherData={weatherData}
                   handleCardClick={handleCardClick}
                   clothingItems={clothingItems}
+                  handleAddClick={handleAddClick}
                 />
               }
             />
             <Route
               path="/profile"
-              element={<Profile handleCardClick={handleCardClick} />}
+              element={
+                <Profile
+                  handleCardClick={handleCardClick}
+                  clothingItems={clothingItems}
+                  handleAddClick={handleAddClick}
+                />
+              }
             />
           </Routes>
         </div>
@@ -111,7 +151,13 @@ function App() {
         <ItemModal
           activeModal={activeModal}
           card={selectedCard}
-          onClose={closeActiveModal}
+          onClose={() => setActiveModal("")}
+          onDeleteClick={openConfirmationModal}
+        />
+        <DeleteConfirmationModal
+          isOpen={activeModal === "delete-confirm"}
+          onClose={() => setActiveModal("preview")} // Cancel, go back to preview modal
+          onConfirm={() => handleDeleteCard(selectedCard)} // Delete confirmed
         />
         <Footer />
       </div>

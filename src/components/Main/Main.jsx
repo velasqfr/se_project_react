@@ -2,6 +2,7 @@ import "./Main.css";
 import WeatherCard from "../WeatherCard/WeatherCard";
 import ItemCard from "../ItemCard/ItemCard";
 
+//THe Main component includes weatherCard, ItemCard compoments
 function Main({ weatherData, handleCardClick, clothingItems }) {
   return (
     <main>

@@ -2,7 +2,8 @@ import ClothesSection from "../ClothesSection/ClothesSection";
 import SideBar from "../SideBar/SideBar";
 import "./Profile.css";
 
-function Profile({ handleCardClick }) {
+//THe Profile component contains SideBar and ClothesSection components
+function Profile({ handleCardClick, clothingItems, handleAddClick }) {
   return (
     <div className="profile">
       <section className="profile__sidebar">
@@ -10,7 +11,11 @@ function Profile({ handleCardClick }) {
         <img src="" alt="" />
       </section>
       <section className="profile__clothing-items">
-        <ClothesSection handleCardClick={handleCardClick} />
+        <ClothesSection
+          clothingItems={clothingItems}
+          handleCardClick={handleCardClick}
+          handleAddClick={handleAddClick}
+        />
       </section>
     </div>
   );

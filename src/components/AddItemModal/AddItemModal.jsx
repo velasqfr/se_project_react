@@ -2,11 +2,13 @@ import "./AddItemModal.css";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useState } from "react";
 
+//The AddItemModal component includes the ModalWithForm component
 export default function AddItemModal({
   onClose,
   isOpen,
   onAddItemModalSubmit,
 }) {
+  console.log("AddItemModal isOpen:", isOpen);
   const [name, setName] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [weather, setWeather] = useState("");

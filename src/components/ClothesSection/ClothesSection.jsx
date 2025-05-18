@@ -2,7 +2,8 @@ import { defaultClothingItems } from "../../utils/constants";
 import "./ClothesSection.css";
 import ItemCard from "../ItemCard/ItemCard";
 
-function ClothesSection({ handleCardClick, handleAddClick }) {
+//Tje ClothesSection component includes the ItemCard Component
+function ClothesSection({ clothingItems, handleCardClick, handleAddClick }) {
   return (
     <div className="clothes-section">
       <div className="clothes-section__header">
@@ -16,7 +17,7 @@ function ClothesSection({ handleCardClick, handleAddClick }) {
         </button>
       </div>
       <ul className="cards__list">
-        {defaultClothingItems.map((item) => {
+        {clothingItems.map((item) => {
           return (
             <ItemCard
               key={item._id}

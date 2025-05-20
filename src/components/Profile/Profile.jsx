@@ -8,7 +8,6 @@ function Profile({ handleCardClick, clothingItems, handleAddClick }) {
     <div className="profile">
       <section className="profile__sidebar">
         <SideBar />
-        <img src="" alt="" />
       </section>
       <section className="profile__clothing-items">
         <ClothesSection

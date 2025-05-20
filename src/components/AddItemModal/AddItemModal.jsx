@@ -1,6 +1,6 @@
 import "./AddItemModal.css";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 //The AddItemModal component includes the ModalWithForm component
 export default function AddItemModal({
@@ -12,6 +12,17 @@ export default function AddItemModal({
   const [name, setName] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [weather, setWeather] = useState("");
+
+  // Reset form fields whenever the modal is opened
+  //Empty the inputs (resettig the form of the modal)
+  //to empty the inputs all we have to do is set the state variables to empty strings(default vairable)
+  useEffect(() => {
+    if (isOpen) {
+      setName("");
+      setImageUrl("");
+      setWeather("");
+    }
+  }, [isOpen]);
 
   //created a function for the onChange handler for name and link
   //e.target represents the element in which the event occured on
@@ -33,11 +44,6 @@ export default function AddItemModal({
     e.preventDefault(); //prevents the page from refreshing
     //Update clothingItems array
     onAddItemModalSubmit({ name, imageUrl, weather });
-    //Empty the inputs (resettig the form of the modal)
-    //to empty the inputs all we have to do is set the state variables to empty strings(default vairable)
-    setName("");
-    setImageUrl("");
-    setWeather("");
   };
 
   return (
@@ -69,7 +75,7 @@ export default function AddItemModal({
         Image{" "}
         <input
           type="url"
-          name="link"
+          name="imageUrl"
           className="modal__input"
           id="imageUrl"
           placeholder="Image URL"

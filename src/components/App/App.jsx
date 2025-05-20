@@ -45,6 +45,7 @@ function App() {
 
   const closeActiveModal = () => {
     setActiveModal("");
+    setSelectedCard(null);
   };
 
   /////////////////// -- Adding Item to the Form Mode -- ///////////////////
@@ -73,8 +74,7 @@ function App() {
           prevItems.filter((item) => item._id !== cardToDelete._id)
         );
         //close all modals and reset selected card
-        setActiveModal("");
-        setSelectedCard(null);
+        closeActiveModal();
       })
       .catch(console.error);
   };
@@ -151,7 +151,7 @@ function App() {
         <ItemModal
           activeModal={activeModal}
           card={selectedCard}
-          onClose={() => setActiveModal("")}
+          onClose={closeActiveModal}
           onDeleteClick={openConfirmationModal}
         />
         <DeleteConfirmationModal

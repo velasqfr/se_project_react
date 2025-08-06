@@ -9,6 +9,8 @@ function ModalWithForm({
   isOpen,
   onClose,
   onSubmit,
+  isButtonDisabled,
+  switchButton,
 }) {
   useModalClose(isOpen, onClose);
   return (
@@ -18,11 +20,21 @@ function ModalWithForm({
         <button onClick={onClose} type="button" className="modal__close">
           <img src={close} alt="close modal" />
         </button>
+
         <form onSubmit={onSubmit} className="modal__form">
           {children}
-          <button type="submit" className="modal__submit">
-            {buttonText}
-          </button>
+          <div className="modal__action">
+            <button
+              type="submit"
+              className="modal__submit"
+              disabled={isButtonDisabled}
+            >
+              {buttonText}
+            </button>
+            {switchButton && (
+              <div className="modal__switch">{switchButton}</div>
+            )}
+          </div>
         </form>
       </div>
     </div>

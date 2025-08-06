@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Routes, Route, useNavigate } from "react-router-dom";
+import { createUser, loginUser, checkToken } from "../../utils/auth";
 
 import "./App.css";
 import Header from "../Header/Header";
@@ -14,6 +15,9 @@ import AddItemModal from "../AddItemModal/AddItemModal";
 //import { defaultClothingItems } from "../../utils/constants";
 import { getItems, addItem, deleteItem } from "../../utils/api";
 import DeleteConfirmationModal from "../DeleteConfirmationModal/DeleteConfirmationModal";
+import RegisterModal from "../RegisterModal/RegisterModal";
+import LoginModal from "../LoginModal/LoginModal";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -27,6 +31,9 @@ function App() {
   const [activeModal, setActiveModal] = useState(""); //an empty string means(Default) => no modal is active here
   const [selectedCard, setSelectedCard] = useState(null);
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
+  const [currentUser, setCurrentUser] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate();
 
   //If the current temperature is "F" switch it to "C", if it is "C" switch it to "F"
   const handleToggleSwitchChange = () => {
@@ -37,7 +44,7 @@ function App() {
     }
   }; //or you can also do "setCurrentTemperatureUnit(currentTemperatureUnit === "F"? "C":"F");"
 
-  ///////////// -- Opening & closing the Modal -- //////////////
+  /////////////////////--Opening & closing the Modal--////////////////////
   const handleAddClick = () => {
     console.log("Add button clicked");
     setActiveModal("add-garment");
@@ -47,6 +54,11 @@ function App() {
     setActiveModal("");
     setSelectedCard(null);
   };
+
+  //////////////////////--Opening the Register / Login Modal--/////////////////////
+  const openRegisterModal = () => setActiveModal("register");
+
+  const openLoginModal = () => setActiveModal("login");
 
   /////////////////// -- Adding Item to the Form Mode -- ///////////////////
   const handleAddItemModalSubmit = ({ name, imageUrl, weather }) => {
@@ -58,15 +70,15 @@ function App() {
       .catch(console.error);
   };
 
-  ///////////// -- Opening & closing the Card-Modal -- //////////////
+  //////////////////-- Opening & closing the Card-Modal--//////////////////
 
-  ///////////// -- Clicking the Card to open the Modal -- //////////////
+  //////////////////--Clicking the Card to open the Modal--/////////////////
   const handleCardClick = (card) => {
     setActiveModal("preview");
     setSelectedCard(card);
   };
 
-  //////////////////--Delete Card item Handler --////////////////////
+  ///////////////////////--Delete Card item Handler --////////////////////////////
   const handleDeleteCard = (cardToDelete) => {
     deleteItem(cardToDelete._id)
       .then(() => {
@@ -79,15 +91,62 @@ function App() {
       .catch(console.error);
   };
 
-  /////////////--New Handler for condimration deletion--/////////////
+  //////////////////////--New Handler for confirmation deletion--////////////////////
   const openConfirmationModal = (card) => {
     setSelectedCard(card);
     setActiveModal("delete-confirm");
   };
 
-  ///////////// -- Clicking the Card to open the Modal -- //////////////
+  /////////////////////--New Handler for Register Submission--///////////////////////
+  function handleRegisterSubmit({ name, avatar, email, password }) {
+    console.log("Register submmit started");
 
-  ///////////////API Weather - when the page loads/////////////////////////
+    createUser({ name, avatar, email, password })
+      .then(() => {
+        // After successful registration, automatically log the user in
+        return loginUser({ email, password });
+      })
+      .then((data) => {
+        localStorage.setItem("token", data.token);
+        setCurrentUser(data.user);
+        setIsLoggedIn(true);
+        closeActiveModal();
+      })
+      .catch((err) => {
+        console.error("Failed to register or login user", err);
+      });
+  }
+  //////////////////////////--New Handler for Logging Out --///////////////////////
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    setIsLoggedIn(false);
+    setCurrentUser(null);
+    navigate("/", { replace: true });
+  };
+
+  //////////////////////////--New Handler for Login Submission--///////////////////////
+  function handleLoginSubmit({ email, password }) {
+    loginUser({ email, password })
+      .then((data) => {
+        localStorage.setItem("token", data.token);
+
+        setCurrentUser(data.user);
+        setIsLoggedIn(true);
+
+        closeActiveModal();
+      })
+      .catch((err) => {
+        console.error("Login failed", err);
+      });
+  }
+
+  //////////////////////-New Handler for Wiriging up Switch Handlers--///////////////////
+  const onSwitchToRegister = () => setActiveModal("register");
+  const switchToLogin = () => setActiveModal("login");
+
+  ///////////////////////--Clicking the Card to open the Modal--///////////////////////
+
+  ///////////////////////--API Weather - when the page loads/////////////////////////
   //the way a useEffect works, if you pass a second arguement that is an empty array, it will get run (&one time only) when the component first loads
 
   useEffect(() => {
@@ -112,13 +171,34 @@ function App() {
       .catch(console.error);
   }, []);
 
+  /////////////////////////////--Check if there is a tokem--//////////////////////////////
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      checkToken(token)
+        .then((user) => {
+          console.log("User info from valid token:", user);
+        })
+        .catch((err) => {
+          console.error("Token not valid", err);
+        });
+    }
+  }, []); //[] - Without it, the effect might run more often than you want
+
   return (
     <CurrentTemperatureUnitContext.Provider
       value={{ currentTemperatureUnit, handleToggleSwitchChange }}
     >
       <div className="page">
         <div className="page__content">
-          <Header handleAddClick={handleAddClick} weatherData={weatherData} />
+          <Header
+            handleAddClick={handleAddClick}
+            openLoginModal={openLoginModal}
+            weatherData={weatherData}
+            isLoggedIn={isLoggedIn}
+            currentUser={currentUser}
+            handleLogout={handleLogout}
+          />
           <Routes>
             <Route
               path="/"
@@ -128,17 +208,20 @@ function App() {
                   handleCardClick={handleCardClick}
                   clothingItems={clothingItems}
                   handleAddClick={handleAddClick}
+                  openRegisterModal={openRegisterModal}
                 />
               }
             />
             <Route
               path="/profile"
               element={
-                <Profile
-                  handleCardClick={handleCardClick}
-                  clothingItems={clothingItems}
-                  handleAddClick={handleAddClick}
-                />
+                <ProtectedRoute isLoggedIn={isLoggedIn}>
+                  <Profile
+                    handleCardClick={handleCardClick}
+                    clothingItems={clothingItems}
+                    handleAddClick={handleAddClick}
+                  />
+                </ProtectedRoute>
               }
             />
           </Routes>
@@ -159,6 +242,18 @@ function App() {
           onClose={() => setActiveModal("preview")} // Cancel, go back to preview modal
           onConfirm={() => handleDeleteCard(selectedCard)} // Delete confirmed
         />
+        <RegisterModal
+          isOpen={activeModal === "register"}
+          onClose={closeActiveModal}
+          onRegisterModalSubmit={handleRegisterSubmit}
+          onSwitchToLogin={switchToLogin}
+        />
+        <LoginModal
+          isOpen={activeModal === "login"}
+          onClose={closeActiveModal}
+          onLoginModalSubmit={handleLoginSubmit}
+          onSwitchToRegister={onSwitchToRegister}
+        ></LoginModal>
         <Footer />
       </div>
     </CurrentTemperatureUnitContext.Provider>

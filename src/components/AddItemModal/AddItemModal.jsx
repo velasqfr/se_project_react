@@ -9,13 +9,13 @@ export default function AddItemModal({
   onAddItemModalSubmit,
 }) {
   console.log("AddItemModal isOpen:", isOpen);
+  //////////////// 1. State Variables - These hold the input values and update when the user types./////////////
   const [name, setName] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [weather, setWeather] = useState("");
 
-  // Reset form fields whenever the modal is opened
-  //Empty the inputs (resettig the form of the modal)
-  //to empty the inputs all we have to do is set the state variables to empty strings(default vairable)
+  ///////////////// 2. useEffect to Reset on Open - This resets the form fields when the modal opens.//////////
+  //to empty the inputs all we have to do is set the state variables to empty strings("")
   useEffect(() => {
     if (isOpen) {
       setName("");
@@ -24,6 +24,7 @@ export default function AddItemModal({
     }
   }, [isOpen]);
 
+  ////////////////// 3. Handlers for Inputs - Each input updates its state on change./////////////////////////
   //created a function for the onChange handler for name and link
   //e.target represents the element in which the event occured on
   const handleNameChange = (e) => {
@@ -38,8 +39,7 @@ export default function AddItemModal({
     setWeather(e.target.value);
   };
 
-  //Submit handler that will run when we submit the modal
-  //We are going to need to pass this in modalWithForm & use this as an event handler on the form when we submit the form in the modal
+  ////////////////// 4. Submit Handler - On form submit, it prevents the default refresh and calls a function passed from the parent, giving it the form data.///////
   const handleSubmit = (e) => {
     e.preventDefault(); //prevents the page from refreshing
     //Update clothingItems array

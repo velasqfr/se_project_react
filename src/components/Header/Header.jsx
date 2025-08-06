@@ -5,7 +5,14 @@ import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 import { Link } from "react-router-dom";
 
 //THe Header component includes the ToggleSwitch component
-function Header({ handleAddClick, weatherData }) {
+function Header({
+  handleAddClick,
+  weatherData,
+  openLoginModal,
+  isLoggedIn,
+  currentUser,
+  handleLogout,
+}) {
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",
@@ -27,12 +34,35 @@ function Header({ handleAddClick, weatherData }) {
       >
         + Add clothes
       </button>
-      <Link to="/profile" className="header__link">
-        <div className="header__user-container">
-          <p className="header__username">Terrence Tegegne</p>
-          <img src={avatar} alt="Terrence Tegegne" className="header__avatar" />
-        </div>
-      </Link>
+      {isLoggedIn ? (
+        <>
+          <Link to="/profile" className="header__link">
+            <div className="header__user-container">
+              <p className="header__username">{currentUser?.name || "User"}</p>
+              <img
+                src={avatar}
+                alt="Terrence Tegegne"
+                className="header__avatar"
+              />
+            </div>
+          </Link>
+          <button
+            onClick={handleLogout}
+            type="button"
+            className="header__logout-btn"
+          >
+            Logout
+          </button>{" "}
+        </>
+      ) : (
+        <button
+          onClick={openLoginModal}
+          type="button"
+          className="header__login-btn"
+        >
+          Log In
+        </button>
+      )}
     </header>
   );
 }

@@ -143,3 +143,92 @@
 .modal__submit:active {
   background-color: #000000;
 }
+
+.modal__switch-btn {
+  width: 164;
+  height: 36;
+  top: 491px;
+  left: 500px;
+  angle: 0 deg;
+  opacity: 1;
+  border-radius: 4px;
+}
+
+.email__label,
+.password__label {
+  font-family: Cabinet Grotesk;
+  font-weight: 700;
+  font-style: Bold;
+  font-size: 16px;
+  leading-trim: NONE;
+  line-height: 20px;
+  letter-spacing: 0%;
+  border: none;
+}
+
+.modal__input,
+.email__input,
+.password__input {
+  width: 440px;
+  height: 24px;
+  border: none;
+  border-bottom: 1px solid #000;
+  outline: none;
+  cursor: pointer;
+  font-family: "Cabinet Grotesk", sans-serif;
+  font-size: 16px;
+}
+
+.modal__title {
+  font-family: Cabinet Grotesk;
+  font-weight: 700;
+  font-style: Bold;
+  font-size: 16px;
+
+  line-height: 20px;
+  letter-spacing: 0%;
+}
+
+.modal__action {
+  display: flex;
+  align-items: center;
+  margin-top: 24px;
+  gap: 1px;
+}
+
+.modal__switch-btn {
+  width: 164px;
+  height: 36px;
+  top: 491px;
+  left: 500px;
+  angle: 0 deg;
+  opacity: 1;
+  border-radius: 4px;
+  cursor: pointer;
+  border: none;
+}
+
+.modal__submit,
+.modal__switch-btn {
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  line-height: 1;
+  height: 36px;
+  font-size: 16px;
+  font-family: "Cabinet Grotesk", sans-serif;
+}
+.modal__submit {
+  cursor: pointer;
+  background-color: #000000;
+}
+
+.modal__submit:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.header__login-btn {
+  border: none;
+  cursor: pointer;
+}

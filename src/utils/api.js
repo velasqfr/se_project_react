@@ -4,8 +4,12 @@ function checkResponse(res) {
   return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
 }
 
-function getItems() {
-  return fetch(`${baseUrl}/items`).then(checkResponse);
+function getItems(token) {
+  return fetch(`${baseUrl}/items`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }).then(checkResponse);
 }
 
 function addItem({ name, imageUrl, weather }, token) {

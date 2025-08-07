@@ -1,9 +1,20 @@
+import React, { useContext } from "react";
 import { defaultClothingItems } from "../../utils/constants";
 import "./ClothesSection.css";
 import ItemCard from "../ItemCard/ItemCard";
+import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 
-//Tje ClothesSection component includes the ItemCard Component
+//The ClothesSection component includes the ItemCard Component
 function ClothesSection({ clothingItems, handleCardClick, handleAddClick }) {
+  //This gives us information about the user who is currently logged in, like their unique ID (_id), name, avatar, etc.
+  const currentUser = useContext(CurrentUserContext);
+
+  //Filtering clothing items to only include items owned by the currentUser._id
+  const userClothingItems = clothingItems.filter(
+    (item) => item.owner === currentUser._id
+  );
+
   return (
     <div className="clothes-section">
       <div className="clothes-section__header">
@@ -16,17 +27,21 @@ function ClothesSection({ clothingItems, handleCardClick, handleAddClick }) {
           + Add New
         </button>
       </div>
-      <ul className="cards__list">
-        {clothingItems.map((item) => {
-          return (
-            <ItemCard
-              key={item._id}
-              item={item}
-              onCardClick={handleCardClick} //Pass as prop
-            />
-          );
-        })}
-      </ul>
+      {userClothingItems.length === 0 ? ( //If no items are owned
+        <p className="clothes-section__empty">You have no items yet.</p>
+      ) : (
+        <ul className="cards__list">
+          {userClothingItems.map((item) => {
+            return (
+              <ItemCard
+                key={item._id}
+                item={item}
+                onCardClick={handleCardClick} //Pass as prop
+              />
+            );
+          })}
+        </ul>
+      )}
     </div>
   );
 }

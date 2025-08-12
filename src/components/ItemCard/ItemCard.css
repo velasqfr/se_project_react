@@ -31,3 +31,14 @@
   border-radius: 12px;
   cursor: pointer;
 }
+
+.card__like-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+.card__like-button_liked {
+  color: red;
+}

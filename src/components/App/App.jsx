@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import CurrentUserContext from "../../contexts/CurrentUserContext";
 import { Routes, Route, useNavigate } from "react-router-dom";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
+import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
 import { createUser, loginUser, checkToken } from "../../utils/auth";
 
 import "./App.css";
@@ -10,16 +11,21 @@ import Footer from "../footer/footer";
 import ItemModal from "../ItemModal/ItemModal";
 import { getWeather, filterWeatherData } from "../../utils/weatherAPI";
 import { coordinates, APIkey } from "../../utils/constants";
-import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
 import Profile from "../Profile/Profile";
 import AddItemModal from "../AddItemModal/AddItemModal";
 //import { defaultClothingItems } from "../../utils/constants";
-import { getItems, addItem, deleteItem } from "../../utils/api";
+import {
+  getItems,
+  addItem,
+  deleteItem,
+  updateUserProfile,
+} from "../../utils/api";
 import DeleteConfirmationModal from "../DeleteConfirmationModal/DeleteConfirmationModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
 import LoginModal from "../LoginModal/LoginModal";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import EditProfileModal from "..//EditProfileModal/EditProfileModal";
+import { addCardLike, removeCardLike } from "../../utils/api";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -107,6 +113,28 @@ function App() {
       .catch(console.error);
   };
 
+  //////////////////////--New Handler for card liking--////////////////////
+  const handleCardLike = ({ id, isLiked }) => {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      console.error("User not authenticated");
+      return;
+    }
+    //Checks if the card is currently liked (isLiked)
+    //Calls either addCardLike or removeCardLike
+    const apiCall = isLiked ? removeCardLike : addCardLike;
+
+    //Replaces the liked card in state with the updated one from the server
+    apiCall(id, token)
+      .then((updatedCard) => {
+        setClothingItems((prevCards) =>
+          prevCards.map((item) => (item._id === id ? updatedCard : item))
+        );
+      })
+      .catch((err) => console.error("Like/unlike failed", err));
+  };
+
   //////////////////////--New Handler for confirmation deletion--////////////////////
   const openConfirmationModal = (card) => {
     setSelectedCard(card);
@@ -132,14 +160,6 @@ function App() {
         console.error("Failed to register or login user", err);
       });
   }
-  //////////////////////////--New Handler for Logging Out --///////////////////////
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    setIsLoggedIn(false);
-    setCurrentUser(null);
-    navigate("/", { replace: true });
-  };
-
   //////////////////////////--New Handler for Login Submission--///////////////////////
   function handleLoginSubmit({ email, password }) {
     loginUser({ email, password })
@@ -155,6 +175,36 @@ function App() {
         console.error("Login failed", err);
       });
   }
+
+  //////////////////////////--New Handler for Logging Out --///////////////////////
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    setIsLoggedIn(false);
+    setCurrentUser(null);
+    navigate("/", { replace: true });
+  };
+
+  ////////////////////////////--Edit Profile Modal--/////////////////////////////////
+  const handleEditProfileClick = () => {
+    setActiveModal("edit-profile"); //EditProfileModal opens when activeModal === "edit-profile"
+  };
+
+  const handleCloseEditModal = () => {
+    setActiveModal("");
+  };
+
+  //////////////////////////--New Handler for Updating User in EditProfileModal--///////////////////////
+  const handleUpdateUser = ({ name, avatar }) => {
+    const token = localStorage.getItem("token");
+    return updateUserProfile({ name, avatar }, token) //The form submits data to your backend and updates the app stat
+      .then((updatedUser) => {
+        setCurrentUser(updatedUser);
+        setActiveModal("");
+      })
+      .catch((err) => {
+        console.error("Failed to update user", err);
+      });
+  };
 
   //////////////////////-New Handler for Wiriging up Switch Handlers--///////////////////
   const onSwitchToRegister = () => setActiveModal("register");
@@ -176,6 +226,7 @@ function App() {
   }, []);
 
   useEffect(() => {
+    if (!currentUser) return;
     const token = localStorage.getItem("token");
     getItems(token)
       .then((data) => {
@@ -186,7 +237,7 @@ function App() {
         }
       })
       .catch(console.error);
-  }, []);
+  }, [currentUser]);
 
   /////////////////////////////--Check if there is a tokem--//////////////////////////////
   useEffect(() => {
@@ -230,6 +281,7 @@ function App() {
                     clothingItems={clothingItems}
                     handleAddClick={handleAddClick}
                     openRegisterModal={openRegisterModal}
+                    onCardLike={handleCardLike}
                   />
                 }
               />
@@ -241,6 +293,7 @@ function App() {
                       handleCardClick={handleCardClick}
                       clothingItems={clothingItems}
                       handleAddClick={handleAddClick}
+                      onEditClick={handleEditProfileClick}
                     />
                   </ProtectedRoute>
                 }
@@ -277,7 +330,7 @@ function App() {
           />
           <EditProfileModal
             isOpen={activeModal === "edit-profile"}
-            onClose={closeActiveModal}
+            onClose={handleCloseEditModal}
             onSubmit={handleUpdateUser}
           />
           <Footer />

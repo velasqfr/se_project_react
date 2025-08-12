@@ -14,7 +14,7 @@ function Header({
   isLoggedIn,
   handleLogout,
 }) {
-  //his gives us information about the user who is currently logged in, like their unique ID (_id), name, avatar, etc.
+  //This gives us information about the user who is currently logged in, like their unique ID (_id), name, avatar, etc.
   const currentUser = useContext(CurrentUserContext);
 
   const currentDate = new Date().toLocaleString("default", {

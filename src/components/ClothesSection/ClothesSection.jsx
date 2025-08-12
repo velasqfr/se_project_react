@@ -1,8 +1,6 @@
 import React, { useContext } from "react";
-import { defaultClothingItems } from "../../utils/constants";
 import "./ClothesSection.css";
 import ItemCard from "../ItemCard/ItemCard";
-import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 //The ClothesSection component includes the ItemCard Component
@@ -12,7 +10,7 @@ function ClothesSection({ clothingItems, handleCardClick, handleAddClick }) {
 
   //Filtering clothing items to only include items owned by the currentUser._id
   const userClothingItems = clothingItems.filter(
-    (item) => item.owner === currentUser._id
+    (item) => item.owner.toString() === currentUser._id.toString()
   );
 
   return (

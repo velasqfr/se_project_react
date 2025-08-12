@@ -15,7 +15,7 @@ function ItemModal({ activeModal, onClose, card, onDeleteClick }) {
   // Checking if the current user is the owner of the current clothing item
   //If they match, it means the item was created/owned by the current user.
   //The variable isOwn will be true if the logged-in user owns the item, otherwise false
-  const isOwn = selectedCard.owner === currentUser._id;
+  const isOwn = card.owner === currentUser._id;
 
   return (
     <div className={`modal ${activeModal === "preview" ? "modal_opened" : ""}`}>
@@ -37,13 +37,6 @@ function ItemModal({ activeModal, onClose, card, onDeleteClick }) {
             Delete Item
           </button>
         )}
-        <button
-          type="button"
-          className="item__delete-btn"
-          onClick={() => onDeleteClick(card)} //opens confirmation modal instead of immediate delete
-        >
-          Delete Item
-        </button>
       </div>
     </div>
   );

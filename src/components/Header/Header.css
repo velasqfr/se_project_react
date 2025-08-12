@@ -1,10 +1,13 @@
 .header {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding: 32px 0 28px;
 }
 
 .header__logo {
+  height: 40px;
+  width: 89px;
   margin-right: 24px;
 }
 
@@ -27,6 +30,7 @@
   letter-spacing: 0%;
   border: none;
   cursor: pointer;
+  background-color: #f3f3f3;
 }
 
 .header__user-container {
@@ -68,4 +72,19 @@
   justify-content: center;
   align-items: center;
   user-select: none;
+}
+
+.header__register-btn,
+.header__login-btn,
+.header__logout-btn {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.header__right-section {
+  display: flex;
+  align-items: center;
+  gap: 20px; /* Controls spacing between all right-side elements */
+  margin-left: auto;
 }

@@ -266,6 +266,7 @@ function App() {
             <Header
               handleAddClick={handleAddClick}
               openLoginModal={openLoginModal}
+              handleRegisterClick={openRegisterModal}
               weatherData={weatherData}
               isLoggedIn={isLoggedIn}
               currentUser={currentUser}

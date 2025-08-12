@@ -1,9 +1,11 @@
 import React, { useContext } from "react";
+import { Link } from "react-router-dom";
+
 import "./Header.css";
 import logo from "../../assets/logo.svg";
 import avatar from "../../assets/avatar.png";
+
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
-import { Link } from "react-router-dom";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 //THe Header component includes the ToggleSwitch component
@@ -13,6 +15,7 @@ function Header({
   openLoginModal,
   isLoggedIn,
   handleLogout,
+  handleRegisterClick,
 }) {
   //This gives us information about the user who is currently logged in, like their unique ID (_id), name, avatar, etc.
   const currentUser = useContext(CurrentUserContext);
@@ -60,41 +63,56 @@ function Header({
         <img className="header__logo" src={logo} alt="Weather Wear logo" />
       </Link>
       <p className="header__date-and-location">
-        {currentDate}, {weatherData.city}
+        {currentDate}, {weatherData.city || "Loading..."}
       </p>
-      <ToggleSwitch />
-      <button
-        onClick={handleAddClick}
-        type="button"
-        className="header__add-clothes-btn"
-      >
-        + Add clothes
-      </button>
-      {isLoggedIn ? (
-        <>
-          <Link to="/profile" className="header__link">
-            <div className="header__user-container">
-              <p className="header__username">{currentUser?.name || "User"}</p>
-              {renderAvatar()}
-            </div>
-          </Link>
-          <button
-            onClick={handleLogout}
-            type="button"
-            className="header__logout-btn"
-          >
-            Logout
-          </button>{" "}
-        </>
-      ) : (
-        <button
-          onClick={openLoginModal}
-          type="button"
-          className="header__login-btn"
-        >
-          Log In
-        </button>
-      )}
+      <div className="header__right-section">
+        <ToggleSwitch />
+
+        {isLoggedIn ? (
+          <>
+            <button
+              onClick={handleAddClick}
+              type="button"
+              className="header__add-clothes-btn"
+            >
+              + Add clothes
+            </button>
+
+            <Link to="/profile" className="header__link">
+              <div className="header__user-container">
+                <p className="header__username">
+                  {currentUser?.name || "User"}
+                </p>
+                {renderAvatar()}
+              </div>
+            </Link>
+            <button
+              onClick={handleLogout}
+              type="button"
+              className="header__logout-btn"
+            >
+              Logout
+            </button>
+          </>
+        ) : (
+          <>
+            <button
+              onClick={handleRegisterClick}
+              type="button"
+              className="header__register-btn"
+            >
+              Sign Up
+            </button>
+            <button
+              onClick={openLoginModal}
+              type="button"
+              className="header__login-btn"
+            >
+              Log In
+            </button>
+          </>
+        )}
+      </div>
     </header>
   );
 }

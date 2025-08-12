@@ -1,12 +1,15 @@
 .toggle-switch {
   width: 56px;
   height: 28px;
-  margin-left: 650px;
+
   border: 2px solid #7e7e7e;
   border-radius: 20px;
   cursor: pointer;
   overflow: hidden;
   position: relative;
+  display: flex;
+  justify-content: relative;
+  align-items: center;
 }
 
 .toggle-switch__checkbox {

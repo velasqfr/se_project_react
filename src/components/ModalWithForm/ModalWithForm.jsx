@@ -11,11 +11,13 @@ function ModalWithForm({
   onSubmit,
   isButtonDisabled,
   switchButton,
+  submitEditButton,
+  modalContentClassName,
 }) {
   useModalClose(isOpen, onClose);
   return (
     <div className={`modal ${isOpen ? "modal_opened" : ""}`}>
-      <div className="modal__content">
+      <div className={`modal__content ${modalContentClassName || ""}`}>
         <h2 className="modal__title">{title}</h2>
         <button onClick={onClose} type="button" className="modal__close">
           <img src={close} alt="close modal" />
@@ -26,7 +28,9 @@ function ModalWithForm({
           <div className="modal__action">
             <button
               type="submit"
-              className="modal__submit"
+              className={`modal__submit ${
+                submitEditButton ? ` ${submitEditButton}` : ""
+              }`}
               disabled={isButtonDisabled}
             >
               {buttonText}

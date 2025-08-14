@@ -50,6 +50,7 @@ export default function RegisterModal({
       onClose={onClose}
       onSubmit={handleSubmit}
       isButtonDisabled={!isFormValid}
+      modalContentClassName="modal__register-content"
       switchButton={
         <button
           type="button"

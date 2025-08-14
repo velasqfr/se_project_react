@@ -4,7 +4,12 @@ import ItemCard from "../ItemCard/ItemCard";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 //The ClothesSection component includes the ItemCard Component
-function ClothesSection({ clothingItems, handleCardClick, handleAddClick }) {
+function ClothesSection({
+  clothingItems,
+  handleCardClick,
+  handleAddClick,
+  oncardLike,
+}) {
   //This gives us information about the user who is currently logged in, like their unique ID (_id), name, avatar, etc.
   const currentUser = useContext(CurrentUserContext);
 
@@ -35,6 +40,7 @@ function ClothesSection({ clothingItems, handleCardClick, handleAddClick }) {
                 key={item._id}
                 item={item}
                 onCardClick={handleCardClick} //Pass as prop
+                onCardLike={oncardLike}
               />
             );
           })}

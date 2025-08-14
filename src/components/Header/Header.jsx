@@ -14,7 +14,6 @@ function Header({
   weatherData,
   openLoginModal,
   isLoggedIn,
-  handleLogout,
   handleRegisterClick,
 }) {
   //This gives us information about the user who is currently logged in, like their unique ID (_id), name, avatar, etc.
@@ -86,13 +85,6 @@ function Header({
                 {renderAvatar()}
               </div>
             </Link>
-            <button
-              onClick={handleLogout}
-              type="button"
-              className="header__logout-btn"
-            >
-              Logout
-            </button>
           </>
         ) : (
           <>

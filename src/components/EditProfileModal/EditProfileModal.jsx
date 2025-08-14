@@ -35,12 +35,14 @@ export default function EditProfileModal({ isOpen, onClose, onSubmit }) {
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
-      title="Edit Profile"
+      title="Change Profile Data"
       buttonText={isSubmitting ? "Saving..." : "Save"}
       isButtonDisabled={isSubmitting || !name.trim()}
+      submitEditButton="modal__edit-btn"
+      modalContentClassName="modal__edit-content"
     >
       <label className="modal__label">
-        Name
+        Name*
         <input
           className="modal__edit-name"
           type="text"
@@ -52,9 +54,9 @@ export default function EditProfileModal({ isOpen, onClose, onSubmit }) {
         />
       </label>
       <label className="modal__label">
-        Avatar URL
+        Avatar
         <input
-          className="modal__edit-avatar-url"
+          className="modal__avatar-url"
           type="url"
           value={avatar}
           onChange={(e) => setAvatar(e.target.value)}
@@ -62,9 +64,6 @@ export default function EditProfileModal({ isOpen, onClose, onSubmit }) {
           required
         />
       </label>
-      <button type="submit" className="modal__save-btn">
-        Save
-      </button>
     </ModalWithForm>
   );
 }

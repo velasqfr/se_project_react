@@ -40,6 +40,7 @@ export default function LoginModal({
       onClose={onClose}
       isButtonDisabled={!isFormValid}
       onSubmit={handleSubmit}
+      modalContentClassName="modal__login-content"
       switchButton={
         <button
           type="button"

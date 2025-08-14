@@ -124,7 +124,7 @@
 .modal__submit {
   background-color: #0000004d;
   color: #fff;
-  margin-top: -45px;
+  margin-top: -90px;
   border-radius: 4px;
   width: 124px;
   height: 36px;
@@ -149,26 +149,24 @@
   height: 36;
   top: 491px;
   left: 500px;
-  angle: 0 deg;
   opacity: 1;
   border-radius: 4px;
 }
 
-.email__label,
-.password__label {
+.modal__edit-content .email__label,
+.modal__edit-content .password__label {
   font-family: Cabinet Grotesk;
   font-weight: 700;
   font-style: Bold;
   font-size: 16px;
-  leading-trim: NONE;
   line-height: 20px;
   letter-spacing: 0%;
   border: none;
 }
 
-.modal__input,
-.email__input,
-.password__input {
+.modal__edit-content .modal__input,
+.modal__edit-content .email__input,
+.modal__edit-content .password__input {
   width: 440px;
   height: 24px;
   border: none;
@@ -201,14 +199,12 @@
   height: 36px;
   top: 491px;
   left: 500px;
-  angle: 0 deg;
   opacity: 1;
   border-radius: 4px;
   cursor: pointer;
   border: none;
 }
 
-.modal__submit,
 .modal__switch-btn {
   align-items: center;
   padding: 0;
@@ -217,10 +213,6 @@
   height: 36px;
   font-size: 16px;
   font-family: "Cabinet Grotesk", sans-serif;
-}
-.modal__submit {
-  cursor: pointer;
-  background-color: #000000;
 }
 
 .modal__submit:disabled {

@@ -11,13 +11,14 @@ function Profile({
   handleAddClick,
   onEditClick,
   onCardLike,
+  handleLogout,
 }) {
   const currentUser = useContext(CurrentUserContext);
 
   return (
     <div className="profile">
       <section className="profile__sidebar">
-        <SideBar onEditClick={onEditClick} />
+        <SideBar onEditClick={onEditClick} handleLogout={handleLogout} />
       </section>
       <section className="profile__clothing-items">
         <ClothesSection

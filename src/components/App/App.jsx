@@ -295,6 +295,7 @@ function App() {
                       clothingItems={clothingItems}
                       handleAddClick={handleAddClick}
                       onEditClick={handleEditProfileClick}
+                      handleLogout={handleLogout}
                     />
                   </ProtectedRoute>
                 }

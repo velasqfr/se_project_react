@@ -88,29 +88,29 @@ This project uses a Node/Express backend (`se_project_express`) which includes:
 ### 🏠 Homepage & User Flow
 
 **🔐 Register Screen**  
-![Screenshot of register](./assets/pics/register.png)
+![Screenshot of register](./src/assets/pics/register.png)
 
 **🔐 Login Screen**  
-![Screenshot of login](./assets/pics/login.png)
+![Screenshot of login](./src/assets/pics/login.png)
 
 **👤 User Profile Page**  
-![Screenshot of profile](./assets/pics/profile.png)
+![Screenshot of profile](./src/assets/pics/profile.png)
 
 **📝 Edit Profile Modal**  
-![Screenshot of editing profile](./assets/pics/editProfile.png)
+![Screenshot of editing profile](./src/assets/pics/editProfile.png)
 
 ---
 
 ### 👕 Clothing Item Interactions
 
 **➕ Add Clothing Item Modal**  
-![Screenshot of adding clothes](./assets/pics/addingClothes.png)
+![Screenshot of adding clothes](./src/assets/picsaddingClothes.png)
 
 **👕 Clothing Item Preview Modal**  
-![Screenshot of item](./assets/pics/clothingItem.png)
+![Screenshot of item](./src/assets/pics/clothingItem.png)
 
 **🗑️ Deletion Confirmation Modal**  
-![Screenshot of deletion](./assets/pics/delete.png)
+![Screenshot of deletion](./src/assets/pics/delete.png)
 
 ## Future Improvements:
 

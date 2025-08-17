@@ -44,53 +44,25 @@ export default function RegisterModal({
 
   return (
     <ModalWithForm
-      title="Register"
+      title="Sign Up"
       buttonText="Sign Up"
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
       isButtonDisabled={!isFormValid}
+      isFormValid={isFormValid}
       modalContentClassName="modal__register-content"
+      submitEditButton="register__submit-btn"
       switchButton={
         <button
           type="button"
-          className="modal__switch-btn"
+          className="register__switch-btn"
           onClick={onSwitchToLogin}
         >
           or Log In
         </button>
       }
     >
-      <label htmlFor="register-name" className="name__label">
-        Name
-        <input
-          id="register-name"
-          type="text"
-          className="name__input"
-          placeholder="Name"
-          required
-          minLength="1"
-          maxLength="30"
-          onChange={handleNameChange}
-          value={name}
-        />
-      </label>
-
-      <label htmlFor="register-avatar" className="avatar__label">
-        Avatar
-        <input
-          id="register-avatar"
-          type="text"
-          className="avatar__input"
-          placeholder="Avatar"
-          required
-          minLength="1"
-          maxLength="30"
-          onChange={handleAvatarChange}
-          value={avatar}
-        />
-      </label>
-
       <label htmlFor="register-email" className="email__label">
         Email
         <input
@@ -105,7 +77,6 @@ export default function RegisterModal({
           value={email}
         />
       </label>
-
       <label htmlFor="register-password" className="password__label">
         Password
         <input
@@ -118,6 +89,34 @@ export default function RegisterModal({
           maxLength="15"
           onChange={handlePasswordChange}
           value={password}
+        />
+      </label>
+      <label htmlFor="register-name" className="name__label">
+        Name
+        <input
+          id="register-name"
+          type="text"
+          className="name__input"
+          placeholder="Name"
+          required
+          minLength="1"
+          maxLength="30"
+          onChange={handleNameChange}
+          value={name}
+        />
+      </label>
+      <label htmlFor="register-avatar" className="avatar__label">
+        Avatar URL
+        <input
+          id="register-avatar"
+          type="text"
+          className="avatar__input"
+          placeholder="Avatar URL"
+          required
+          minLength="1"
+          maxLength="30"
+          onChange={handleAvatarChange}
+          value={avatar}
         />
       </label>
     </ModalWithForm>

@@ -87,28 +87,32 @@ export const defaultClothingItems = [
     _id: 0,
     name: "Cap",
     weather: "warm",
-    link: "https://i.pinimg.com/564x/7c/97/8c/7c978cafd491f2ec3f559a68660ce9f6.jpg",
+    imageUrl:
+      "https://i.pinimg.com/564x/7c/97/8c/7c978cafd491f2ec3f559a68660ce9f6.jpg",
     //https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Cap.png?etag=f3dad389b22909cafa73cff9f9a3d591
   },
   {
     _id: 1,
     name: "Hoodie",
     weather: "cold",
-    link: "https://cdn.poizon.com/pro-img/cut-img/20250328/74468aaf5b574e22ae52e8a4f814e3b7.jpg?x-oss-process=image/format,webp/resize,w_750",
+    imageUrl:
+      "https://cdn.poizon.com/pro-img/cut-img/20250328/74468aaf5b574e22ae52e8a4f814e3b7.jpg?x-oss-process=image/format,webp/resize,w_750",
     //https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Hoodie.png?etag=5f52451d0958ccb1016c78a45603a4e8
   },
   {
     _id: 2,
     name: "Jacket",
     weather: "cold",
-    link: "https://cdn-img.poizonapp.com/pro-img/cut-img/20250406/e32c905fbcb7417db721868ba306a988.jpg?x-oss-process=image/format,webp/resize,w_800,h_800",
+    imageUrl:
+      "https://cdn-img.poizonapp.com/pro-img/cut-img/20250406/e32c905fbcb7417db721868ba306a988.jpg?x-oss-process=image/format,webp/resize,w_800,h_800",
     //https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Jacket.png?etag=f4bb188deaa25ac84ce2338be2d404ad
   },
   {
     _id: 3,
     name: "Boots",
     weather: "cold",
-    link: "https://img.freepik.com/premium-vector/vector-cartoon-yellow-work-boots-illustration_1258045-3932.jpg",
+    imageUrl:
+      "https://img.freepik.com/premium-vector/vector-cartoon-yellow-work-boots-illustration_1258045-3932.jpg",
     //https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Sneakers.png?etag=3efeec41c1c78b8afe26859ca7fa7b6f
   },
 
@@ -116,52 +120,60 @@ export const defaultClothingItems = [
     _id: 4,
     name: "T-Shirt",
     weather: "warm",
-    link: "https://newyorkornowhere.com/cdn/shop/files/NYON-New-York-Or-Nowhere-Women_s-Motto-Tee-Blue-Composite.png?v=1733331606&width=1600",
+    imageUrl:
+      "https://newyorkornowhere.com/cdn/shop/files/NYON-New-York-Or-Nowhere-Women_s-Motto-Tee-Blue-Composite.png?v=1733331606&width=1600",
     //https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/T-Shirt.png?etag=44ed1963c44ab19cd2f5011522c5fc09
   },
   {
     _id: 5,
     name: "Coat",
     weather: "cold",
-    link: "https://www.supremecommunity.com/u/season/fall-winter2023/drop/supreme-r-the-north-face-r-suede-nuptse-jacket-black-0.jpg",
+    imageUrl:
+      "https://www.supremecommunity.com/u/season/fall-winter2023/drop/supreme-r-the-north-face-r-suede-nuptse-jacket-black-0.jpg",
     //https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Coat.png?etag=298717ed89d5e40b1954a1831ae0bdd4
   },
   {
     _id: 6,
     name: "Sandals",
     weather: "hot",
-    link: "https://i.pinimg.com/736x/43/c6/51/43c6512d68c91ba3e5d40599e8327c51.jpg",
+    imageUrl:
+      "https://i.pinimg.com/736x/43/c6/51/43c6512d68c91ba3e5d40599e8327c51.jpg",
   },
   {
     _id: 7,
     name: "Jersey",
     weather: "hot",
-    link: "https://static.wixstatic.com/media/31d308_2285b3992ddf4414892627db423173a5~mv2.png/v1/fill/w_2500,h_2500,al_c/31d308_2285b3992ddf4414892627db423173a5~mv2.png",
+    imageUrl:
+      "https://static.wixstatic.com/media/31d308_2285b3992ddf4414892627db423173a5~mv2.png/v1/fill/w_2500,h_2500,al_c/31d308_2285b3992ddf4414892627db423173a5~mv2.png",
   },
   {
     _id: 8,
     name: "Cargo",
     weather: "warm",
-    link: "https://st4.depositphotos.com/2485347/20979/v/450/depositphotos_209791348-stock-illustration-light-brown-jogger-pants-white.jpg",
+    imageUrl:
+      "https://st4.depositphotos.com/2485347/20979/v/450/depositphotos_209791348-stock-illustration-light-brown-jogger-pants-white.jpg",
   },
   {
     _id: 9,
     name: "Shoes",
     weather: "warm",
-    link: "https://www.kevinandkaia.com/uploads/1/2/6/1/126191832/s922489433528641189_p701_i99_w1050.png                               ",
+    imageUrl:
+      "https://www.kevinandkaia.com/uploads/1/2/6/1/126191832/s922489433528641189_p701_i99_w1050.png                               ",
   },
   {
     _id: 10,
     name: "Sneakers",
     weather: "hot",
-    link: "https://i.pinimg.com/736x/33/73/b3/3373b308935a205a905ced4d3d45bc73.jpg",
+    imageUrl:
+      "https://i.pinimg.com/736x/33/73/b3/3373b308935a205a905ced4d3d45bc73.jpg",
   },
 
   {
     _id: 11,
     name: "water",
     weather: "hot",
-    link: "https://i.pinimg.com/736x/d6/d1/fb/d6d1fb67348dbb02863b41b4399f66dc.jpg",
+    imageUrl:
+      "https://i.pinimg.com/736x/d6/d1/fb/d6d1fb67348dbb02863b41b4399f66dc.jpg",
   },
 ];
 

@@ -10,6 +10,7 @@ function ModalWithForm({
   onClose,
   onSubmit,
   isButtonDisabled,
+  isFormValid,
   switchButton,
   submitEditButton,
   modalContentClassName,
@@ -28,8 +29,8 @@ function ModalWithForm({
           <div className="modal__action">
             <button
               type="submit"
-              className={`modal__submit ${
-                submitEditButton ? ` ${submitEditButton}` : ""
+              className={`modal__submit ${submitEditButton} ${
+                isFormValid ? "active" : ""
               }`}
               disabled={isButtonDisabled}
             >

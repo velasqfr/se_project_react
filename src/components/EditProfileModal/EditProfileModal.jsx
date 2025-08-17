@@ -47,7 +47,7 @@ export default function EditProfileModal({ isOpen, onClose, onSubmit }) {
           className="modal__edit-name"
           type="text"
           minLength="3"
-          maxLength="10"
+          maxLength="20"
           value={name}
           onChange={(e) => setName(e.target.value)}
           required

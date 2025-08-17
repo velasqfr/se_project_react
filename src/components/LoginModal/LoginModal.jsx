@@ -9,11 +9,13 @@ export default function LoginModal({
 }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loginError, setLoginError] = useState(false);
 
   useEffect(() => {
     if (isOpen) {
       setEmail("");
       setPassword("");
+      setLoginError(false); // Reset error on modal open
     }
   }, [isOpen]);
 
@@ -23,13 +25,19 @@ export default function LoginModal({
 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
+    if (loginError) setLoginError(false); // Reset on change
   };
 
   const isFormValid = email && password;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    onLoginModalSubmit({ email, password });
+    const success = await onLoginModalSubmit({ email, password });
+    if (!success) {
+      setLoginError(true); //show error styles
+    } else {
+      setLoginError(false); // clear error styles
+    }
   };
 
   return (
@@ -39,15 +47,17 @@ export default function LoginModal({
       isOpen={isOpen}
       onClose={onClose}
       isButtonDisabled={!isFormValid}
+      isFormValid={isFormValid}
       onSubmit={handleSubmit}
       modalContentClassName="modal__login-content"
+      submitEditButton="login__submit-btn"
       switchButton={
         <button
           type="button"
-          className="modal__switch-btn"
+          className="login__switch-btn"
           onClick={onSwitchToRegister}
         >
-          or Sign Up
+          or Register
         </button>
       }
     >
@@ -68,17 +78,24 @@ export default function LoginModal({
 
       <label htmlFor="login-password" className="password__label">
         Password
-        <input
-          id="login-password"
-          type="password"
-          className="password__input"
-          placeholder="Password"
-          required
-          minLength="5"
-          maxLength="50"
-          onChange={handlePasswordChange}
-          value={password}
-        ></input>
+        <div className="input-wrapper">
+          <input
+            id="login-password"
+            type="password"
+            className={`password__input ${loginError ? "input-error" : ""}`}
+            placeholder="Password"
+            required
+            minLength="5"
+            maxLength="50"
+            onChange={handlePasswordChange}
+            value={password}
+          />
+          {loginError && (
+            <span className="login__error-text-overlay">
+              Incorrect password
+            </span>
+          )}
+        </div>
       </label>
     </ModalWithForm>
   );

@@ -8,7 +8,7 @@ function ClothesSection({
   clothingItems,
   handleCardClick,
   handleAddClick,
-  oncardLike,
+  onCardLike,
 }) {
   //This gives us information about the user who is currently logged in, like their unique ID (_id), name, avatar, etc.
   const currentUser = useContext(CurrentUserContext);
@@ -40,7 +40,7 @@ function ClothesSection({
                 key={item._id}
                 item={item}
                 onCardClick={handleCardClick} //Pass as prop
-                onCardLike={oncardLike}
+                onCardLike={onCardLike}
               />
             );
           })}

@@ -7,7 +7,7 @@ import { createUser, loginUser, checkToken } from "../../utils/auth";
 import "./App.css";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
-import Footer from "../footer/footer";
+import Footer from "../Footer/Footer";
 import ItemModal from "../ItemModal/ItemModal";
 import { getWeather, filterWeatherData } from "../../utils/weatherAPI";
 import { coordinates, APIkey } from "../../utils/constants";
@@ -24,7 +24,7 @@ import DeleteConfirmationModal from "../DeleteConfirmationModal/DeleteConfirmati
 import RegisterModal from "../RegisterModal/RegisterModal";
 import LoginModal from "../LoginModal/LoginModal";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
-import EditProfileModal from "..//EditProfileModal/EditProfileModal";
+import EditProfileModal from "../EditProfileModal/EditProfileModal";
 import { addCardLike, removeCardLike } from "../../utils/api";
 
 function App() {
@@ -152,7 +152,10 @@ function App() {
       })
       .then((data) => {
         localStorage.setItem("token", data.token);
-        setCurrentUser(data.user);
+        return checkToken(data.token); // Fetch user data
+      })
+      .then((user) => {
+        setCurrentUser(user); // sets user with correct data
         setIsLoggedIn(true);
         closeActiveModal();
       })
@@ -162,17 +165,20 @@ function App() {
   }
   //////////////////////////--New Handler for Login Submission--///////////////////////
   function handleLoginSubmit({ email, password }) {
-    loginUser({ email, password })
+    return loginUser({ email, password })
       .then((data) => {
         localStorage.setItem("token", data.token);
-
-        setCurrentUser(data.user);
+        return checkToken(data.token); //Fetch user data
+      })
+      .then((user) => {
+        setCurrentUser(user); // sets user with correct data
         setIsLoggedIn(true);
-
         closeActiveModal();
+        return true; // sucesss
       })
       .catch((err) => {
         console.error("Login failed", err);
+        return false; //failure
       });
   }
 
@@ -226,7 +232,6 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (!currentUser) return;
     const token = localStorage.getItem("token");
     getItems(token)
       .then((data) => {
@@ -296,6 +301,7 @@ function App() {
                       handleAddClick={handleAddClick}
                       onEditClick={handleEditProfileClick}
                       handleLogout={handleLogout}
+                      onCardLike={handleCardLike}
                     />
                   </ProtectedRoute>
                 }

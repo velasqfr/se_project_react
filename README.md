@@ -87,6 +87,9 @@ This project uses a Node/Express backend (`se_project_express`) which includes:
 
 ### 🏠 Homepage & User Flow
 
+**🏠 Home Screen**  
+![Screenshot of home](./src/assets/pics/home.png)
+
 **🔐 Register Screen**  
 ![Screenshot of register](./src/assets/pics/register.png)
 
@@ -104,7 +107,7 @@ This project uses a Node/Express backend (`se_project_express`) which includes:
 ### 👕 Clothing Item Interactions
 
 **➕ Add Clothing Item Modal**  
-![Screenshot of adding clothes](./src/assets/picsaddingClothes.png)
+![Screenshot of adding clothes](./src/assets/pics/addingClothes.png)
 
 **👕 Clothing Item Preview Modal**  
 ![Screenshot of item](./src/assets/pics/clothingItem.png)

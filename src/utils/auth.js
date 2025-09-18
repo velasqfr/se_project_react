@@ -1,4 +1,5 @@
-import { baseUrl, checkResponse } from "./api";
+import { checkResponse } from "./api";
+import { baseUrl } from "./constants";
 
 //POST /signup - for user registration
 function createUser({ name, avatar, email, password }) {

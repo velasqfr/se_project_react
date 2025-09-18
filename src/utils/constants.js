@@ -177,6 +177,11 @@ export const defaultClothingItems = [
   },
 ];
 
+const baseUrl =
+  process.env.NODE_ENV === "production"
+    ? "https://api.wtwr-96.mine.bz"
+    : "http://localhost:3001";
+
 export const coordinates = {
   latitude: 40.783058,
   longitude: -73.971252,
@@ -187,3 +192,4 @@ export const coordinates = {
 //longitude: -80.1
 
 export const APIkey = "60b7c0d868aadffe04cd99623c32ceae";
+export { baseUrl };

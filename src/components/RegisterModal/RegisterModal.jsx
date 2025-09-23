@@ -114,7 +114,7 @@ export default function RegisterModal({
           placeholder="Avatar URL"
           required
           minLength="1"
-          maxLength="30"
+          maxLength="50"
           onChange={handleAvatarChange}
           value={avatar}
         />

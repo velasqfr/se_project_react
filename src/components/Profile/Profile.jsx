@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import ClothesSection from "../ClothesSection/ClothesSection";
 import SideBar from "../SideBar/SideBar";
@@ -18,6 +18,12 @@ function Profile({
   return (
     <div className="profile">
       <section className="profile__sidebar">
+        <h2 className="profile__greeting">
+          Welcome, {currentUser.name || "User"}!
+        </h2>
+        <p className="profile__email">
+          {currentUser.email || "Email not available"}
+        </p>
         <SideBar onEditClick={onEditClick} handleLogout={handleLogout} />
       </section>
       <section className="profile__clothing-items">

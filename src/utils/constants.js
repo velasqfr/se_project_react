@@ -1,3 +1,5 @@
+/* global process */
+
 export const weatherOptions = [
   //mport.meta.ur says make what's in "" relative to the folder
   {

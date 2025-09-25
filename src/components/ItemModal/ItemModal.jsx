@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import "./ItemModal.css";
 import close from "../../assets/close.png";
 import useModalClose from "../../hooks/useModalClose";

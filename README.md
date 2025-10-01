@@ -1,108 +1,131 @@
-## WTWR (What to Wear?): Back End
+## Description - WTWR: Weather-Based Wardrobe App (React + Express)
 
-The back-end project is focused on creating a server for the WTWR application. You’ll gain a deeper understanding of how to work with databases, set up security and testing, and deploy web applications on a remote machine. The eventual goal is to create a server with an API and user authorization.
+- WWWR is a full-stack weather web app that helps users pick clothing items suited to the current weather. The app fetches weather data for a location and displays relevant garments. Users can register, log in, add, like, and delete clothing items, and manage their profiles. The app dynamically toggles temperature units between Fahrenheit and Celsius for user convenience.
 
-## 🛠️ Technical Stack
+## Features
 
-- Node.Js
-- Express.js
-- MongoDb
-- Mongoose
-- JSON Web Tokens (JWT)
-- Celebrate / Joi & Validator.js
+- Weather Integration:
 
-## 🛠 Technologies & Techniques Used
+  - Fetches real-time weather data using an external API
+  - Displays location-based weather information
+  - Supports temperature toggling between Fahrenheit (°F) and Celsius (°C)
 
-- VS Code: Open-source editor used for writing and managing our code
-- Express.JS: A popular server-side web framework used to handle HTTP requests and define our API routes
-- MongoDB: NoSQL database used to store our application data — in this case, clothingItems and users
-- MongoDB Compass: GUI tool used to create, view, and manage our MongoDB databases and their contents.
-- Mongoose: ODM library tool that allowed us to define schemas and manage interactions with our MongoDB database using JavaScript objects
-- Nodemon: Development Dependency server tool used for hot reloading
-- JSON Web Tokens: For authentication & authorization by securely transmitting information between parties in JSON format
-- EsLint: Code linting tool used with Airbnb style guide to enforce consistent code styling and improving overall code quality.
-- Validator.js and Celebrate/Joi: Integrated for robust input validation and request data integrity.
-- Helmet: Middleware to add essential security headers to HTTP responses.
-- Winston: Logging library for capturing requests and errors.
-- Error Handling: Logs error for developers, prevents app crashes, and provides useful feedback to users
-- Example: middleware was implemented to catch and handle errors during the request–response cycle.
-- Postman: An API platform used for testing and managing our APIs, particularly passing all of our potential errors
+- Interactive Clothing Card System:
 
-## 🌐 Deployment
+  - Displays clothing items filtered by weather type (Hot, Warm, & Cold)
+  - Clickable cards show a preview of item details
 
-- Live Domain: https://wtwr-96.mine.bz
-- Frontend Repository: https://github.com/velasqfr/se_project_react.git
+- Modal System:
 
-## 📦 Project Overview – Back End Features
+  - Preview modal for viewing item details
+  - Add-item modal for uploading new garments
+  - Authentication modals for registration and login
+  - Edit profile modal for updating user info
+  - Delete confirmation modal for item removal
 
-- Setting up the server using Express.js
-- Connecting to MongoDB using Mongoose for data modeling
-- Creating API endpoints to handle CRUD functionality
-- Implementing user actions such as adding, deleting, liking, and unliking
-- Performing input validation and structured error handling
-- Preparing the server for deployment on a remote environmentß
+- User Features:
+  - Secure user registration & login
+  - Ability to add, like, and delete clothing item cards
+  - Edit user profile (name & avatar)
+  - Toggle between temperature units (°F/°C)
 
-## 💻 Running the Project Locally
+## Technologies and Techniques Used
 
-1. Install MongoDB:
+- FrontEnd: React (With Vite)
+- Backend: Express.js (Node.js)
+- Authentication: JWT-based secure login with token storage
+- API Integration: OpenWeather API
+- State Management: React Hooks + Context API
+- Form Validation: Controlled components with inline validation
+- Styling: Responsive CSS
+- Developer Tools: Prettier, ESLint, Vite Dev Server
 
-   - Ensure MongoDB is installed on your machine. Download MongoDB if needed.
+## 📡 API Overview
 
-2. Start the MongoDB:
+This project uses a Node/Express backend (`se_project_express`) which includes:
 
-   - Start the MongoDB service so the server can connect to the database.
-   - 📝 Note: The database and collections will be created automatically on first use of the API.
+### 🔐 Auth Endpoints
 
-3. Install Dependencies:
+- `POST /signup` — Register new user
+- `POST /signin` — Log in
 
-   - Run the following command to install all project dependencies:
-     ```bash
-     npm install
-     ```
+### 👤 User Endpoints
 
-4. Start the Server:
-   - For production mode - launch the server:
-     ```bash
-     npm run start
-     ```
-   - For development mode with hot reloading:
-     ```bash
-     npm run dev
-     ```
+- `GET /users/me` — Get current user info
+- `PATCH /users/me` — Update user profile
 
-## 🔗 API Endpoints
+### 👚 Clothing Item Endpoints
 
-| Method | Endpoint             | Description                        |
-| ------ | -------------------- | ---------------------------------- |
-| POST   | /items               | Create a new clothing item         |
-| GET    | /items               | Retrieve all clothing items        |
-| PUT    | /items/:itemId       | Update a clothing item's image URL |
-| DELETE | /items/:itemId       | Delete a clothing item             |
-| PUT    | /items/:itemId/likes | Like a clothing item               |
-| DELETE | /items/:itemId/likes | Unlike a clothing item             |
+- `GET /items` — Fetch all clothing items
+- `POST /items` — Add new item
+- `DELETE /items/:itemId` — Delete item by ID
 
-## ✅ Key Features
+### ❤️ Like Endpoints
 
-- **Robust Data Modeling & Validation**  
-  Mongoose schemas with built-in validation, supplemented by validator.js and Celebrate/Joi for request validation.
+- `PUT /items/:itemId/likes` — Like an item
+- `DELETE /items/:itemId/likes` — Remove like
 
-- **User Authentication & Authorization**  
-  Secure signup/login with JWT tokens and authorization middleware to protect sensitive routes.
+## Backend Repository
 
-- **Full CRUD Operations with Access Control**  
-  Complete create, read, update, and delete endpoints for clothing items, enforcing ownership permissions on sensitive actions.
+👉 [se_project_express](https://github.com/velasqfr/se_project_express)
 
-- **Like/Unlike Functionality**  
-  Users can like or unlike clothing items, with unique user tracking to prevent duplicate likes.
+## Installation and Running Locally
 
-- **Centralized & Structured Error Handling**  
-  Custom error classes and global middleware ensure consistent, clear error responses with proper HTTP status codes.
+1. Clone the repo:
+   'git clone https://github.com/velasqfr/se_project_react.git'
 
-- **Security Enhancements**  
-  Helmet middleware adds essential security headers to HTTP responses.
+2. Install dependencies:
+   'npm install'
 
-- **Request & Error Logging**  
-  Winston-based logging captures all requests and errors for easier debugging and monitoring.
+3. Start the development server:
+   'npm run dev' in frontend folder (uses Vite)
+   'npm start' in backend folder
 
-- **Modular Codebase**  
-  Well-organized folder structure separating concerns: routes, controllers, models, middlewares.
+4. Open `http://localhost:3000` in your browser
+
+## 📸 Screenshots
+
+### 🏠 Homepage & User Flow
+
+**🏠 Home Screen**  
+![Screenshot of home](./src/assets/pics/home.png)
+
+**🔐 Register Screen**  
+![Screenshot of register](./src/assets/pics/register.png)
+
+**🔐 Login Screen**  
+![Screenshot of login](./src/assets/pics/login.png)
+
+**👤 User Profile Page**  
+![Screenshot of profile](./src/assets/pics/profile.png)
+
+**📝 Edit Profile Modal**  
+![Screenshot of editing profile](./src/assets/pics/editProfile.png)
+
+---
+
+### 👕 Clothing Item Interactions
+
+**➕ Add Clothing Item Modal**  
+![Screenshot of adding clothes](./src/assets/pics/addingClothes.png)
+
+**👕 Clothing Item Preview Modal**  
+![Screenshot of item](./src/assets/pics/clothingItem.png)
+
+**🗑️ Deletion Confirmation Modal**  
+![Screenshot of deletion](./src/assets/pics/delete.png)
+
+## Future Improvements:
+
+- Filtering clothing items by tag or category
+- Adding support for multiple locations
+
+## ⚛️ React + Vite Setup
+
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+
+Currently, two official plugins are available:
+
+This project uses Vite for lightning-fast builds and hot module replacement (HMR). The template includes:
+@vitejs/plugin-react — uses Babel for Fast Refresh
+@vitejs/plugin-react-swc — uses SWC for improved performance
